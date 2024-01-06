@@ -23,12 +23,14 @@ const ignoreMap = {
   comment: /#.*$/my,
 } as const;
 
+export type Token = { kind: keyof typeof tokenMap; text: string };
+
 export function lex(code: string) {
-  const out = [];
+  const out: Token[] = [];
   loop: while (code.length) {
-    // console.log(out);
-    for (const kind in tokenMap) {
-      const regex = tokenMap[kind as keyof typeof tokenMap];
+    for (const key in tokenMap) {
+      const kind = key as keyof typeof tokenMap;
+      const regex = tokenMap[kind];
       const execResult = regex.exec(code);
       if (execResult) {
         out.push({ kind, text: execResult[0] });
