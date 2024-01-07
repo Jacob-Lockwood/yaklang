@@ -15,7 +15,9 @@ const tokenMap = {
   tilde: /~/y,
   questionMark: /\?/y,
   colon: /:/y,
-  word: /\$?([A-Za-z_]+|[!@%^&*|\-+/`<>]+)/y,
+  semicolon: /;/y,
+  functionName: /([A-Za-z_]+|[!@%^&*|\-+/`<>]+)/y,
+  variableName: /\$([A-Za-z_]+|[!@%^&*|\-+/`<>]+)/y,
 } as const;
 
 const ignoreMap = {
