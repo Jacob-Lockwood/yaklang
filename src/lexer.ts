@@ -18,7 +18,8 @@ const tokenMap = {
   questionMark: /\?/y,
   colon: /:/y,
   semicolon: /;/y,
-  word: /\$?\w+|[!@%^&*|\-+/`<>]+/y,
+  word: /[$a-z]\w*|[!@%^&*|\-+/`<>]+/y,
+  typeName: /[A-Z]\w*/y,
 } as const;
 
 const ignoreMap = {
