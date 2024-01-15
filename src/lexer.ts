@@ -1,3 +1,5 @@
+import { assert } from "./util/assert.ts";
+
 // y flag--see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/sticky
 const tokenMap = {
   string: /"([^"]|\\")*"/y,
@@ -16,14 +18,17 @@ const tokenMap = {
   questionMark: /\?/y,
   colon: /:/y,
   semicolon: /;/y,
-  functionName: /([A-Za-z_]+|[!@%^&*|\-+/`<>]+)/y,
-  variableName: /\$([A-Za-z_]+|[!@%^&*|\-+/`<>]+)/y,
+  word: /\$?\w+|[!@%^&*|\-+/`<>]+/y,
 } as const;
 
 const ignoreMap = {
   whitespace: /\s+/y,
   comment: /#.*$/my,
 } as const;
+
+for (const re of Object.values({ ...tokenMap, ...ignoreMap })) {
+  assert(re.sticky);
+}
 
 export type Token = { kind: keyof typeof tokenMap; text: string };
 
