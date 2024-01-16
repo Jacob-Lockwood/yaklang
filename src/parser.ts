@@ -105,7 +105,14 @@ export class Parser {
   }
 
   program() {
-    return this.manyWithSeperator(this.expression, "semicolon");
+    return this.manyWithSeperator(this.statement, "semicolon");
+  }
+  statement() {
+    return this.or([
+      this.expression,
+      this.typeDefinition,
+      this.genericTypeDefinition,
+    ]);
   }
   expression(): RuntimeNode {
     const nodes = this.many(this.primary, true);
